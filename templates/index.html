@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>farri</title>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"></script>
+   <style>
+      body {
+         margin: 1px;
+         background-image: linear-gradient(to right, #0F2027, #203A43, #2C5364, #2C5364, #203A43, #0F2027);
+      }
+
+      .card {
+         background-color: rgba(245, 245, 245, 0.4);
+      }
+
+      .card-header {
+         opacity: 1
+      }
+   </style>
+</head>
+
+<body>
+   <div class="container pt-5">
+      <div class="card shadow ">
+         <div class="card-header">
+            <h1 class="text-center">Image classification-niveau de fibrose</h1>
+         </div>
+         <div class="card-body">
+            <form class="form-vertical" action="/submit" method="POST" enctype="multipart/form-data">
+               <label class="control-label text-white" for="image">Veuiller télécharger
+                  l’image
+                  dont
+                  vous voulez connaitre le niveau de Fibrose :</label>
+               <div class="row">
+                  <div class="col-md-8">
+                     <input type="file" class="form-control" name="my-image" id="image">
+                  </div>
+                  <div class="col">
+                     <div class="col-sm-offset-2 col-sm-10 text-left">
+                        <button type="submit" class="btn btn-success btn-lg">valider</button>
+                     </div>
+                  </div>
+               </div>
+
+            </form>
+         </div>
+      </div>
+
+
+
+   {% if prediction!=null %}
+   <div class="mt-5">
+   <img src="{{img_path}}" height="200px" width="200px">
+</div>
+   {% if prediction == 0 %}
+   <h2 style="color: white;"><b>Le niveau de fibrose correspondant à cette image est inférieur à F2.</b></h2>
+   {% endif %}
+   {% if prediction == 1 %}
+   <h2 style="color: white;"><b>Le niveau de fibrose correspondant à cette image est supérieur ou égal à F2.</b></h2>
+   {% endif %}
+   {% endif %}
+   </div>
+
+</body>
+
+</html>
